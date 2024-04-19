@@ -3,5 +3,13 @@
 
 
 def add(a: float, b: float) -> int:
-    """Add function that is type annoted"""
+    """Add function that is type annoted
+    
+    Args:
+        a (float): first operand
+        b (float): second operand
+
+    Returns:
+        float: The sum of both the operands
+    """
     return a + b
