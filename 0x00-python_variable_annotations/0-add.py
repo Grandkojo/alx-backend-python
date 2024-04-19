@@ -2,9 +2,9 @@
 """This is a type annoted function"""
 
 
-def add(a: float, b: float) -> int:
+def add(a: float, b: float) -> float:
     """Add function that is type annoted
-    
+
     Args:
         a (float): first operand
         b (float): second operand
