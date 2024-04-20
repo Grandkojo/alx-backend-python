@@ -1,4 +1,4 @@
-#!/usr/bn/env python3
+#!/usr/bin/env python3
 """Duck typing annotation"""
 from typing import List, Union, Any, Sequence
 
