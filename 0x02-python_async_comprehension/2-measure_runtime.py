@@ -9,7 +9,7 @@ import asyncio
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime():
+async def measure_runtime() -> float:
     """Parallel comprehension"""
     start_time = time.perf_counter()
     coroutines = [async_comprehension() for i in range(4)]
