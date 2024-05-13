@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""The test class for access_nested_map"""
 
 
 from parameterized import parameterized
