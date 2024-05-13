@@ -43,6 +43,11 @@ class TestAccessNestedMap(unittest.TestCase):
                                          path: Sequence,
                                          expected: Any) -> None:
         """Test access nested map exception
+    
+        Args:
+            nested_map (Mapping): nested map
+            path (Sequence): path
+            expected (Any): expected value
         """
         with self.assertRaises(expected) as exc:
             access_nested_map(nested_map, path)
