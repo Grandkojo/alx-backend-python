@@ -56,5 +56,34 @@ class TestAccessNestedMap(unittest.TestCase):
             self.assertEqual(str(exc.exception), expected_message)
 
 
+class TestGetJson(unittest.TestCase):
+    """Test get_json class
+
+    Args:
+        unittest (unittest.TestCase): unittest
+    """
+    from unittest import mock
+
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
+    ])
+    @mock.patch('requests.get')
+    def test_get_json(self, test_url, test_payload,
+                      mock_request_get: mock.MagicMock) -> None:
+        from utils import get_json
+        """Test get_json function
+
+        Args:
+            test_url (str): test url
+            test_payload (bool): test payload
+            mock_request_get (mock.MagicMock): mock request get
+        """
+        mock_request_get.return_value.json.return_value = test_payload
+        result = get_json(test_url)
+        mock_request_get.assert_called_once_with(test_url)
+        self.assertEqual(result, test_payload)
+
+
 if __name__ == "__main__":
     unittest.main()
