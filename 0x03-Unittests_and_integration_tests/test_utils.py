@@ -2,6 +2,9 @@
 """The test class for access_nested_map"""
 
 
+from utils import get_json
+from utils import memoize
+from unittest import mock
 from parameterized import parameterized
 import unittest
 from utils import access_nested_map
@@ -62,7 +65,6 @@ class TestGetJson(unittest.TestCase):
     Args:
         unittest (unittest.TestCase): unittest
     """
-    from unittest import mock
 
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
@@ -71,7 +73,6 @@ class TestGetJson(unittest.TestCase):
     @mock.patch('requests.get')
     def test_get_json(self, test_url, test_payload,
                       mock_request_get: mock.MagicMock) -> None:
-        from utils import get_json
         """Test get_json function
 
         Args:
@@ -83,6 +84,43 @@ class TestGetJson(unittest.TestCase):
         result = get_json(test_url)
         mock_request_get.assert_called_once_with(test_url)
         self.assertEqual(result, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """This is the memoize class' test cases
+
+    Args:
+        unittest.TestCase (class): This is the test case class
+    """
+
+    def test_memoize(self):
+        """This is the memoize test function
+        """
+
+        class TestClass:
+            """This is jus a test class
+            """
+
+            def a_method(self):
+                """the a_method of the inner class
+                """
+                return 42
+
+            @memoize
+            def a_property(self):
+                return self.a_method()
+
+        with mock.patch.object(TestClass, 'a_method') as mock_a_method:
+            mock_a_method.return_value = 42
+
+            test_class = TestClass()
+            res1 = test_class.a_property
+            res2 = test_class.a_property
+
+            mock_a_method.assert_called_once()
+
+            self.assertEqual(res1, 42)
+            self.assertEqual(res2, 42)
 
 
 if __name__ == "__main__":
